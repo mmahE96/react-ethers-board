@@ -1,23 +1,22 @@
 import logo from './logo.svg';
 import './App.css';
+import { ethers } from "ethers";
+import Header from './components/Header';
+import Main from './components/Main/Main';
 
 function App() {
+  const provider = new ethers.providers.Web3Provider(window.ethereum)
+  const signer = provider.getSigner()
+  console.log(signer)
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+    <Header />
+    </div>
+    
+    <Main />
+      
     </div>
   );
 }

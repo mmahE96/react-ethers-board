@@ -15,7 +15,7 @@ export default function Block() {
 
     const getData = async () => {
         setBlocknumber(await provider.getBlockNumber())
-       setBalance(await provider.getBalance(address))
+       //setBalance(await provider.getBalance(address))
         setBlock(await provider.getBlock(100004))
        }
 
@@ -23,6 +23,14 @@ export default function Block() {
     e.preventDefault()
        console.log("Address submition successefull")
        console.log(address)
+   }
+
+   const getBalance = async () => {
+
+       //setBalance(await provider.getBalance(address))
+       const hexB = await (await provider.getBalance(address))._hex
+       setBalance(hexB)
+       //console.log(balance)
    }
 
    const handleChange = (e) => {
@@ -40,7 +48,7 @@ export default function Block() {
         
         <div className="border p-9">
             <h1 className="text-3xl font-bold">Querying the block</h1>
-            <button onClick={getData}>Get Data</button>
+           
           <div className="flex justify-around flex-wrap gap-10 pt-9">
 
           <div className="box-border h-60 w-60 border">Current Block Number: {blockNumber}</div>
@@ -63,7 +71,7 @@ export default function Block() {
           <br />
           timestamp: {block.timestamp}
           <br />
-          
+          <button className="bg-primary text-white hover:font-bold p-2 rounded-lg" onClick={getData}>Get Data</button>
           
            </div>
 
@@ -79,8 +87,9 @@ export default function Block() {
         </label>
        
        </form>
+       <button className="bg-primary text-white hover:font-bold p-2 rounded-lg" onClick={getBalance}>Get Data</button>
 
-       balance of this address is: {balance != undefined ? balance : "no data"}
+       balance of this address is: {balance != undefined ? balance : "no data"} format hex
           
           </div>
 

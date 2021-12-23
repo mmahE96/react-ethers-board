@@ -12,6 +12,7 @@ export default function Block() {
     const [balance, setBalance] = useState("No data")
     const [block, setBlock] = useState("No data")
     const [address, setAddress] = useState("")
+    const [count, setCount] = useState("")
 
     const getData = async () => {
         setBlocknumber(await provider.getBlockNumber())
@@ -31,6 +32,11 @@ export default function Block() {
        const hexB = await (await provider.getBalance(address))._hex
        setBalance(hexB)
        //console.log(balance)
+   }
+
+   const getCount = async () => {
+       const count = await provider.getTransactionCount(address)
+       setCount(count)
    }
 
    const handleChange = (e) => {
@@ -94,7 +100,23 @@ export default function Block() {
           </div>
 
 
-          <div className="box-border h-60 w-60 border">Convert string into the Wei</div>
+          <div className="box-border h-60 w-60 border">
+          
+          Transaction count:
+          <br />
+          <form onSubmit={submitAddress}>
+        <label>
+        Address:
+          <input className="border" type="text" value={address} onChange={handleChange} />
+        </label>
+       
+       </form>
+       <button className="bg-primary text-white hover:font-bold p-2 rounded-lg" onClick={getCount}>Get Data</button>
+
+       transaction count of this address is:  {count != undefined ? count : "no data"} 
+
+          
+          </div>
 
           <div className="box-border h-60 w-60 border">Current Block Number</div>
 

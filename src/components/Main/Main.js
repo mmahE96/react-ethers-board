@@ -5,7 +5,7 @@ import WriteBlock from './WriteBlock'
 
 export default function Main() {
     return (
-        <div className="container flex flex-col">
+        <div className="flex flex-col gap-y-24">
             
             <Connections />
             <QueryBlock />

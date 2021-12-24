@@ -4,15 +4,6 @@ import { JsonRpcSigner } from '@ethersproject/providers';
 
 export default function Connections() {
 
-    // A Web3Provider wraps a standard Web3 provider, which is
-// what MetaMask injects as window.ethereum into each page
-const provider = new ethers.providers.Web3Provider(window.ethereum)
-
-// The MetaMask plugin also allows signing transactions to
-// send ether and pay to change state within the blockchain.
-// For this, you need the account signer...
-const signer = provider.getSigner()
-console.log("e")
 
 
     return (
@@ -21,9 +12,7 @@ console.log("e")
             <div className="flex justify-around">
             <div className="box-border h-32 w-32 border">
             
-            METAMAKS
-
-            connected to the network: {provider.JsonRpcSigner._network.name}
+           
             
             
             

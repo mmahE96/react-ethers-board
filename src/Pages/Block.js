@@ -17,7 +17,7 @@ export default function Block() {
   const getData = async () => {
     setBlocknumber(await provider.getBlockNumber());
     //setBalance(await provider.getBalance(address))
-    setBlock(await provider.getBlock(100004));
+    setBlock(await provider.getBlock());
   };
 
   const submitAddress = (e) => {

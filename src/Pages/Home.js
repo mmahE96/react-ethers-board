@@ -13,8 +13,11 @@ const Rpcprovider = new ethers.providers.JsonRpcProvider(window.ethereum);
 // The MetaMask plugin also allows signing transactions to
 // send ether and pay to change state within the blockchain.
 // For this, you need the account signer...
-const signer = Metaprovider.getSigner()
-console.log(Metaprovider)
+const signerOne = Metaprovider.getSigner()
+const signerTwo = Rpcprovider.getSigner()
+console.log("This is signer objec metaprovider:", signerOne)
+console.log("This is signer objec rpcprovider:", signerTwo)
+
 
 const condition = Metaprovider.connection.url == "metamask"
 

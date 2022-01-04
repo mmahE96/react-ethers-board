@@ -9,7 +9,8 @@ export default function Contract() {
 
     const [address, setAddress] = useState("")
     const [amount, setAmount] = useState("")
-    const [transactionInfo, setTransactionInfo] = useState("No data")
+    const [transactionFail, setTransactionFail] = useState("No data")
+    const [transactionSucc, setTransactionSucc] = useState({from:"No info", value:{_hex:"No data"}, hash:"No data"})
 
     const handleAddress = (e) => {
         setAddress(e.target.value);
@@ -22,16 +23,25 @@ export default function Contract() {
       
       const handleChanges = async (e) => {
           e.preventDefault()
-          const tx = await signer.sendTransaction({
-            to: address,
-            value: ethers.utils.parseEther(amount)
-        });
-        setTransactionInfo(tx)
-
-        console.log("transaction:", tx)          
+          try {
+            const tx = await signer.sendTransaction({
+              to: address,
+              value: ethers.utils.parseEther(amount)
+          });
+          console.log("Transaction Data:", tx) 
+          setTransactionSucc(tx)
+  
+          console.log("transaction:", tx) 
+          } catch (error) { 
+            console.log("Error:", error)         
+            
+            setTransactionFail(error.message)
+         
+          }
+                   
       }
 
-      console.log("Log of tx", transactionInfo)
+      
     
 
         
@@ -45,15 +55,19 @@ export default function Contract() {
         <h2 className="text-3xl font-bold mb-9">Send ether</h2>
         <div className="flex flex-row justify-around">
         <div>
-        <h2 className="text-xl font-bold mb-8">Signer info:</h2>
+        <h2 className="text-xl font-bold mb-8">Signer info:(success)</h2>
         <div> 
-        Field one:
+        From:
+        {transactionSucc.from}
         <br />
-        Field two:
+        To:
+        {address}
         <br />
-        Field three:
+        Value:
+        {transactionSucc.value._hex}
         <br />
-        Field four:
+        Hash:
+        {transactionSucc.hash}
         <br />         
         </div>        
         </div>
@@ -73,11 +87,12 @@ export default function Contract() {
         </div>   
 
         <div>
-            <h3>Transaction info:</h3>
+            <h3>Transaction info:(fail)</h3>
 
-            <p>{transactionInfo.message}</p>
+            <p>{transactionFail}</p>
         </div>        
         <h2 className="text-3xl font-bold mb-9 mt-24">Interact with contract</h2>
+        
 
         <div className="mt-22">
             some contract

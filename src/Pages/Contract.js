@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Header from '../components/Header'
 import {ethers} from "ethers"
+import Greeter from "../artifacts/contracts/Greeter.sol/Greeter.json"
 
 export default function Contract() {
 
@@ -11,6 +12,40 @@ export default function Contract() {
     const [amount, setAmount] = useState("")
     const [transactionFail, setTransactionFail] = useState("No data")
     const [transactionSucc, setTransactionSucc] = useState({from:"No info", value:{_hex:"No data"}, hash:"No data"})
+
+    //contract is deployed on rinkeby network on this address
+    const contractAddress = "0x5039a82817d481df8C4042089016fFb6F72b2F22"
+    const [greeting, setGreetingValue] = useState("")
+
+    //contract
+    async function fetchGreeting() {
+      const contract = new ethers.Contract(contractAddress, Greeter.abi, provider) 
+      try {
+        const data = await contract.greet() 
+        console.log("data: ", data)
+        
+      } catch (error) {
+        console.log("Error: ", error)
+        
+      }
+    }
+
+    async function requestAccount(){
+      await window.ethereum.request({method: 'eth_requestAccounts'});
+    }
+
+    async function setGreeting(){
+      if (!greeting) return
+      if (typeof window.ethereum !== "undefined") {
+        await requestAccount()
+        const contract = new ethers.Contract(contractAddress, Greeter.abi, signer)
+        const transaction = await contract.setGreeting(greeting)
+        setGreetingValue("")
+        await transaction.wait()
+        fetchGreeting()
+      }
+    }
+
 
     const handleAddress = (e) => {
         setAddress(e.target.value);
@@ -93,6 +128,16 @@ export default function Contract() {
         </div>        
         <h2 className="text-3xl font-bold mb-9 mt-24">Interact with contract</h2>
         
+        <button className="border mt-2" onClick={fetchGreeting}>Fetch Greeting</button>
+        <button className="border mt-2" onClick={setGreeting}>Set Greeting</button>
+        <input 
+        className="border mt-2"
+        onChange={e => setGreetingValue(e.target.value)}
+        value={greeting}
+        placeholder="Set greeting"
+         />
+       
+
 
         <div className="mt-22">
             some contract

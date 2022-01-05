@@ -6,8 +6,7 @@ import { useState } from 'react';
 
 export default function Home() {
  
-const Metaprovider = new ethers.providers.Web3Provider(window.ethereum)
-
+const Metaprovider = new ethers.providers.Web3Provider(window.ethereum);
 const Rpcprovider = new ethers.providers.JsonRpcProvider(window.ethereum);
 
 // The MetaMask plugin also allows signing transactions to
@@ -18,9 +17,7 @@ const signerTwo = Rpcprovider.getSigner()
 console.log("This is signer objec metaprovider:", signerOne)
 console.log("This is signer objec rpcprovider:", signerTwo)
 
-
 const condition = Metaprovider.connection.url == "metamask"
-
 
 const [netObj, setObj] = useState("Unknown network")
 
@@ -32,9 +29,7 @@ const resObj = async () => {
 
 const getNetwork = () => {
     resObj();
-}
-
-    
+}    
     return (
         <div className="flex flex-col bg-white font-mono">
         <Header />
@@ -52,10 +47,7 @@ const getNetwork = () => {
             Connected to the network: {netObj}
             <br />
 
-            <button className="bg-primary text-white hover:font-bold p-2 rounded-lg" onClick={getNetwork}>Check network</button>
-            
-
-            
+            <button className="bg-primary text-white hover:font-bold p-2 rounded-lg" onClick={getNetwork}>Check network</button>  
             
             </div>
             <div className="bg-light rounded p-5 shadow-lg">
@@ -68,8 +60,6 @@ const getNetwork = () => {
             </div>
             </div>
         </div>
-          
-
         </div>
     )
 }

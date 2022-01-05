@@ -33,17 +33,23 @@ export default function Contract() {
         "constant": "Unknown",
         "payable": 5
       }])
+      const [contractProvider, setContractProvider] = useState("Provider")
+      const [contractSigner, setContractSigner] = useState("Signer")
 
     //contract
     async function fetchGreeting() {
-      const contract = new ethers.Contract(contractAddress, Greeter.abi, provider) 
+      const contract = await new ethers.Contract(contractAddress, Greeter.abi, provider) 
       setContract(contract)
       setInterface(contract.interface.fragments)
-      console.log(contract.interface.fragments)
+      
       try {
         const data = await contract.greet() 
         console.log("data: ", data)
         setFetchedGreeting(data)
+        const getProv = await contract.provider.constructor.name
+        setContractProvider(getProv)
+
+        
         
       } catch (error) {
         console.log("Error: ", error)
@@ -56,10 +62,15 @@ export default function Contract() {
     }
 
     async function setGreeting(){
+      const contract = await new ethers.Contract(contractAddress, Greeter.abi, signer)
+        const getSig = await contract.signer.constructor.name
+       setContractSigner(getSig)
+        console.log(contractSigner)
+
       if (!greeting) return
       if (typeof window.ethereum !== "undefined") {
         await requestAccount()
-        const contract = new ethers.Contract(contractAddress, Greeter.abi, signer)
+        
         const transaction = await contract.setGreeting(greeting)
         setGreetingValue("")
         await transaction.wait()
@@ -89,9 +100,9 @@ export default function Contract() {
         <div >
         <p>{fetchedGreeting}</p>
         <br />
-        <button className="border mt-2 p-1 hover:bg-primary hover:text-light" onClick={fetchGreeting}>Fetch Greeting</button>
+        <button className="border mt-2 p-1 hover:bg-primary hover:text-light" onClick={fetchGreeting}>Fetch Greeting(provider)</button>
         <br />
-        <button className="border mt-2 p-1 hover:bg-primary hover:text-light" onClick={setGreeting}>Set Greeting</button>
+        <button className="border mt-2 p-1 hover:bg-primary hover:text-light" onClick={setGreeting}>Set Greeting(signer)</button>
         <br />
         <input 
         className="border mt-2"
@@ -111,6 +122,7 @@ export default function Contract() {
       After fetching greeting you can check contract address:
       <p>{fetchedAddress}</p>
       <button className="border mt-2 p-1 hover:bg-primary hover:text-light" onClick={fetchAddress}>Get contract address</button>
+      <h2 className="text-xl font-bold mb-3 mt-4">Interface module:</h2>
       </div>   
       <div>
         On this button we can see all methods that contract is offering(interface):
@@ -126,7 +138,11 @@ export default function Contract() {
          </li>)}
         </ul>
       </div> 
-            
+          <h2 className="text-xl font-bold mb-3 mt-4">Contract provider module:(click on fetchGreeting button to se Provider)</h2>
+          <h3>Contract provider: {contractProvider}  </h3>
+
+          <h2 className="text-xl font-bold mb-3 mt-4">Contract signer module:(click on setGreeting button to se Signer)</h2>
+          <h3>Contract provider: {contractSigner}  </h3>
         </div>
 
         </div>

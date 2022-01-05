@@ -35,17 +35,14 @@ export default function Transaction() {
         } catch (error) { 
           console.log("Error:", error)         
           
-          setTransactionFail(error.message)
-       
-        }
-                 
+          setTransactionFail(error.message)       
+        }                 
     }  
     
     return (
         <div className="flex flex-col bg-white font-mono">
         <Header />
-        <div className="">
-           
+        <div className="">           
         
         <h2 className="text-xl font-bold mb-8">Signer info:(success)</h2>
 
@@ -64,9 +61,7 @@ export default function Transaction() {
         Hash:
         {transactionSucc.hash}
         <br />         
-        </div> 
-
-        
+        </div>        
 
         <div className="text-xl font-bold">
         <form >
@@ -87,12 +82,8 @@ export default function Transaction() {
 
         <div className="mt-12">
             <h3>Transaction info:(fail)</h3>
-
             <p>{transactionFail}</p>
-        </div>        
-        
-          
-
+        </div> 
         </div>
     )
 }

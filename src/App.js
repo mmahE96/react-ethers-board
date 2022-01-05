@@ -5,6 +5,7 @@ import {Routes, Route} from "react-router-dom"
 import Home from './Pages/Home';
 import Block from './Pages/Block';
 import Contract from './Pages/Contract';
+import Transaction from './Pages/Transaction';
 
 function App() {
   //const provider = new ethers.providers.Web3Provider(window.ethereum)
@@ -22,6 +23,7 @@ function App() {
     <Route path="/" element={<Home />} />
     <Route path="/block" element={<Block />} />
     <Route path="/contract" element={<Contract />} />
+    <Route path="/transactions" element={<Transaction />} />
     </Routes>
 
 

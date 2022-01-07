@@ -93,6 +93,7 @@ export default function Contract() {
        
         <h2 className="text-3xl font-bold mb-9 mt-4">Interact with contract</h2>
         <Link className="hover:text-secondary hover:text-2xl hover:underline mb-14" to="/transactions">Send ether here</Link>
+        <Link className="hover:text-secondary hover:text-2xl hover:underline mb-14" to="/voting">Voting Contract</Link>
         <div className="flex flex-col ">
         
 

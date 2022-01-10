@@ -14,12 +14,49 @@ export default function Voting() {
     const [cInterface, setInterface] = useState("")
 
     const [winningProposal, setWproposal] = useState("")
+    const [userInfo, setUserInfo] = useState({
+        vote:"No data",
+        weight:"No data",
+        delegate:"No data",
+        voted:"No data"
+    })
+
+    const [candidates, setCandidates] = useState("No candidates")
+
+    async function fetchCandidates(){
+        const contract = await new ethers.Contract(contractAddress, Ballot.abi, provider) 
+
+        const candidateOne = await contract.proposals(0)
+        const candidateTwo = await contract.proposals(1)
+
+        setCandidates({one:candidateOne.name, two:candidateTwo.name})
+
+
+    }
+
+    async function getUserInfo(){
+        const contract = await new ethers.Contract(contractAddress, Ballot.abi, provider) 
+       
+        const votersInfo = await contract.voters(window.ethereum.selectedAddress)
+        console.log(votersInfo)
+        const userInformation = await {
+            vote:votersInfo.vote._hex,
+            weight:votersInfo.weight._hex,
+            delegate:votersInfo.delegate,
+            voted:votersInfo.voted
+        }
+        setUserInfo(userInformation)
+
+    }
 
 
     async function fetchWinningProposal() {
         const contract = await new ethers.Contract(contractAddress, Ballot.abi, provider) 
         setContract(contract)
         setInterface(contract.interface.fragments)
+        const cand = await contract.proposals(1)
+        
+        console.log(cand.name)
         
         try {
           const adde = await contract.winningProposal()._hex;
@@ -104,7 +141,41 @@ export default function Voting() {
     return (
         <div className="flex flex-col bg-white font-mono">
         <Header />
-            <h1 className='mb-22'>Voting contract</h1>
+            <h1 className="text-3xl font-bold mb-9 mt-4">Voting contract</h1>
+
+            <div className="flex flex-row justify-around bg-white font-mono mt-20">
+            <div>
+            <h2>User Info:</h2> 
+            <p>
+            <br />
+            delegate:{userInfo.delegate}
+            <br />
+            vote:{userInfo.vote}
+            <br />
+            voted: {userInfo.voted === true ? "true" : "false"}
+            <br />
+            vote weight:{userInfo.weight}
+            <br />
+            <button className='border mt-12 w-40' onClick={getUserInfo}>Get user info</button>
+
+            </p>
+            </div>
+            <div>Candidates:
+            <p>
+                Candaidate 1: {candidates.one}
+                <br />
+                Candaidate 2: {candidates.two}
+                <br />
+                <button className='border mt-12 w-40' onClick={fetchCandidates}>Get Candidates</button>
+
+            </p>
+            
+            
+            
+            </div>
+            </div>
+
+          
             <div className="flex flex-col bg-white font-mono">
             <div>
             {winningProposal} Winning proposal

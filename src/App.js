@@ -7,6 +7,7 @@ import Block from './Pages/Block';
 import Contract from './Pages/Contract';
 import Transaction from './Pages/Transaction';
 import Voting from './Pages/Voting';
+import VotingCotractInfo from './Pages/VotingCotractInfo';
 
 function App() {
   //const provider = new ethers.providers.Web3Provider(window.ethereum)
@@ -26,6 +27,7 @@ function App() {
     <Route path="/contract" element={<Contract />} />
     <Route path="/transactions" element={<Transaction />} />
     <Route path="/voting" element={<Voting />} />
+    <Route path="/votingInfo" element={<VotingCotractInfo />} />
     </Routes>
 
 

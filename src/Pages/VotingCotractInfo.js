@@ -22,7 +22,7 @@ export default function VotingCotractInfo() {
    async function getData() {
 
     const contract = await new ethers.Contract(contractAddress, Ballot.abi, provider)
-    console.log(contract.callStatic.chairperson())
+    console.log(contract)
 
 
        try {

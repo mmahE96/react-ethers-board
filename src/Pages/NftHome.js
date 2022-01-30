@@ -33,36 +33,19 @@ export default function NftHome() {
         
     }, [])
 
-    async function testF() {
-        console.log(loadingState)
-        try {
-            const provider = new ethers.providers.StaticJsonRpcProvider("https://rinkeby.infura.io/v3/e3131bbb80dd494ca44a62bc7fd461e3")
-
-            
-             
-        
-        const marketContract = new ethers.Contract(marketplaceAddress, marketplace.abi, provider)        
-        const data = await marketContract.fetchMarketItems()
-        console.log("fetcehd", data)
-        } catch (error) {
-            console.log(error)
-        }
-
-        
-    }
-
+    
     async function loadNFTs() {
 
         try {
-            const provider = new ethers.providers.StaticJsonRpcProvider("https://rinkeby.infura.io/v3/e3131bbb80dd494ca44a62bc7fd461e3")
+        const provider = new ethers.providers.StaticJsonRpcProvider("https://rinkeby.infura.io/v3/e3131bbb80dd494ca44a62bc7fd461e3")
         const tokenContract = new ethers.Contract(nftaddress, NFT.abi, provider)        
         
         const marketContract = new ethers.Contract(marketplaceAddress, marketplace.abi, provider)        
         console.log("Token and Market contracts downthere")
-        console.log(tokenContract, marketContract)
+        
         const data = await marketContract.fetchMarketItems()
-        console.log("waiting")
-        await console.log(data)
+     
+        
 
         const items = await Promise.all(data.map(async i => {
             const tokenUri = await tokenContract.tokenURI(i.tokenId) 
@@ -89,10 +72,6 @@ export default function NftHome() {
             
         }       
         
-        
-
-        
-        
     }
 
     async function buyNft(nft) {
@@ -102,21 +81,24 @@ export default function NftHome() {
         const signer = provider.getSigner()
         const contract = new ethers.Contract(marketplaceAddress, marketplace.abi, signer)
     
-        const price = ethers.utils.parseUnits(nft.price.toString(), 'ether')
-        const transaction = await contract.createMarketSale(nftaddress, nft.itemId, {
-          value: price
-        })
+        const price = await ethers.utils.parseUnits(nft.price.toString(), 'ether')
+        const lPrice = await price.toString()
+        console.log(typeof price)
+        console.log(typeof lPrice)
+        const transaction = await contract.callStatic.createMarketSale(nftaddress, nft.itemId, { value: price})
+        
         await transaction.wait()
         loadNFTs()
       }
 
-    if (loadingState === 'loaded' && !NFTs.length) return (<h1 className="py-10 px-20 text-3xl">No assets created</h1>)
-   console.log(NFTs)
+    if (loadingState === 'loaded' && !NFTs.length) return (<div><Header />
+        <SubHeader /><h1 className="py-10 px-20 text-3xl">No assets created</h1></div>)
+
     return (
         <div>
          <Header />
         <SubHeader /> 
-        <button className="bg-primary text-white hover:font-bold p-2 rounded-lg" onClick={testF}>Fetch NFT's</button>
+        
         
         <div className="flex justify-center">
       <div className="px-4" style={{ maxWidth: '1600px' }}>
@@ -132,7 +114,7 @@ export default function NftHome() {
                   </div>
                 </div>
                 <div className="p-4 bg-black">
-                  <p className="text-2xl mb-4 font-bold text-white">{nft.price} ETH</p>
+                  <p className="text-2xl mb-4 font-bold text-primary">Price:{nft.price} ETH</p>
                   <button className="bg-primary text-white hover:font-bold p-2 rounded-lg" onClick={() => buyNft(nft)}>Buy</button>
                 </div>
               </div>

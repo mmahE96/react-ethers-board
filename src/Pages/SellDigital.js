@@ -71,11 +71,26 @@ export default function SellDigital() {
       /* then list the item for sale on the marketplace */
       contract = new ethers.Contract(marketplaceAddress, marketplace.abi, signer)
       let listingPrice = await contract.getListingPrice()
+      console.log("Listing price", listingPrice)
       listingPrice = listingPrice.toString()
   
       transaction = await contract.createMarketItem(nftaddress, tokenId, price, { value: listingPrice })
       await transaction.wait()
       
+    }
+
+    async function getLprice() {
+      const web3Modal = new Web3Modal()
+      const connection = await web3Modal.connect()
+      const provider = new ethers.providers.Web3Provider(connection)    
+      const signer = provider.getSigner()
+      const contract = new ethers.Contract(marketplaceAddress, marketplace.abi, signer)
+      let listingPrice = await contract.getListingPrice()
+      await console.log("Listing price", listingPrice)
+      listingPrice = listingPrice.toString()
+
+      await console.log("Stringovana Listing price", listingPrice)
+
     }
   
     
@@ -85,6 +100,7 @@ export default function SellDigital() {
         <SubHeader />
         <div className="flex justify-center">
       <div className="w-1/2 flex flex-col pb-12">
+      <button onClick={getLprice}>Get Listing Price</button>
         <input 
           placeholder="Asset Name"
           className="mt-8 border rounded p-4"

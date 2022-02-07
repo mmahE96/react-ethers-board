@@ -7,12 +7,13 @@ import { useEffect, useState } from 'react'
 import Web3Modal from 'web3modal'
 
 
+
 import NFT from "../artifacts/contracts/NFT.sol/NFT.json"
 import marketplace from "../artifacts/contracts/NFTMarketplace.sol/NFTMarket.json"
 
 const nftaddress = "0x607739B75eDfd19f6EB6cC488B085087A71E7bfc"
 const marketplaceAddress = "0xdb938dF8Dd242a73181a8788733ea291962919ED"
-
+window.ethers = ethers
 
 //rinkeby
 //NFT Market deployed to: 0xdb938dF8Dd242a73181a8788733ea291962919ED
@@ -75,17 +76,21 @@ export default function NftHome() {
     }
 
     async function buyNft(nft) {
-        const web3Modal = new Web3Modal()
-        const connection = await web3Modal.connect()
-        const provider = new ethers.providers.Web3Provider(connection)
+      console.log(nft)
+        
+        
+        const provider = new ethers.providers.Web3Provider(window.ethereum)
         const signer = provider.getSigner()
         const contract = new ethers.Contract(marketplaceAddress, marketplace.abi, signer)
+        console.log("2")
     
-        const price = await ethers.utils.parseUnits(nft.price.toString(), 'ether')
-        const lPrice = await price.toString()
-        console.log(typeof price)
-        console.log(typeof lPrice)
-        const transaction = await contract.callStatic.createMarketSale(nftaddress, nft.itemId, { value: price})
+        const price = ethers.utils.parseUnits(nft.price.toString(), 'ether')
+        console.log("3")
+
+    
+       console.log(price)
+  
+        const transaction = await contract.createMarketSale(nftaddress, nft.tokenId ,{ value: price})
         
         await transaction.wait()
         loadNFTs()

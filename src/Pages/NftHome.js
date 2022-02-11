@@ -4,7 +4,7 @@ import SubHeader from '../components/SubHeader'
 import { ethers } from 'ethers'
 import axios from "axios"
 import { useEffect, useState } from 'react'
-import Web3Modal from 'web3modal'
+
 
 
 
@@ -42,19 +42,19 @@ export default function NftHome() {
         const tokenContract = new ethers.Contract(nftaddress, NFT.abi, provider)        
         
         const marketContract = new ethers.Contract(marketplaceAddress, marketplace.abi, provider)        
-        console.log("Token and Market contracts downthere")
+        
         
         const data = await marketContract.fetchMarketItems()
      
         
 
         const items = await Promise.all(data.map(async i => {
-            const tokenUri = await tokenContract.tokenURI(i.tokenId) 
+            const tokenUri = await tokenContract.tokenURI(i.itemId) 
             const meta = await axios.get(tokenUri)
             let price = ethers.utils.formatUnits(i.price.toString(), "ether")
             let item = {
                 price,
-                tokenId: i.tokenId.toNumber(),
+                itemId: i.itemId.toNumber(),
                 seller: i.seller,
                 owner: i.owner,
                 sold: i.sold,
@@ -76,21 +76,16 @@ export default function NftHome() {
     }
 
     async function buyNft(nft) {
-      console.log(nft)
-        
-        
+        console.log(nft)       
         const provider = new ethers.providers.Web3Provider(window.ethereum)
         const signer = provider.getSigner()
         const contract = new ethers.Contract(marketplaceAddress, marketplace.abi, signer)
-        console.log("2")
-    
+        console.log("2")    
         const price = ethers.utils.parseUnits(nft.price.toString(), 'ether')
-        console.log("3")
-
-    
-       console.log(price)
-  
-        const transaction = await contract.createMarketSale(nftaddress, nft.tokenId ,{ value: price})
+        console.log(price) 
+        const num = Number(nft.itemId)
+        console.log(num)
+        const transaction = await contract.createMarketSale(nftaddress, nft.itemId , { value: price})
         
         await transaction.wait()
         loadNFTs()

@@ -22,6 +22,7 @@ export default function SellDigital() {
   
     async function onChange(e) {
       const file = e.target.files[0]
+      
       try {
         const added = await client.add(
           file,
@@ -30,6 +31,7 @@ export default function SellDigital() {
           }
         )
         const url = `https://ipfs.infura.io/ipfs/${added.path}`
+        console.log("prvi url koji settamo", url)
         setFileUrl(url)
       } catch (error) {
         console.log('Error uploading file: ', error)
@@ -42,9 +44,12 @@ export default function SellDigital() {
       const data = JSON.stringify({
         name, description, image: fileUrl
       })
+      console.log("strigifayan data za deployanje u client.add", data)
       try {
         const added = await client.add(data)
+        console.log("Added prije ugradnje u url", added)
         const url = `https://ipfs.infura.io/ipfs/${added.path}`
+        console.log("Url za deployanje na IPFS")
         /* after file is uploaded to IPFS, pass the URL to save it on Polygon */
         createSale(url)
       } catch (error) {

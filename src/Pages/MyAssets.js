@@ -49,17 +49,24 @@ export default function MyAssets() {
   }
   if (loadingState === 'loaded' && !nfts.length) return (<div><Header />
     <SubHeader /><h1 className="py-10 px-20 text-3xl">No assets owned</h1></div>)
+    console.log(nfts)
+
+    
   return (
       <div>
     <Header />
     <SubHeader />
     <div className="flex justify-center">
       <div className="p-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
+        <div className="flex justify-around h-auto w-auto">
           {
             nfts.map((nft, i) => (
-              <div key={i} className="border shadow rounded-xl overflow-hidden">
-                <img src={nft.image} className="rounded" />
+              <div key={i} className="font-bold px-5 flex justify-center flex-col items-center border shadow rounded-xl overflow-hidden">
+              <div>Nft ID:{nft.tokenId} </div>
+                <img className='mb-2' src={nft.image} style={{ height: '350px', width:"300px" }} className="rounded"/>
+                <div className='mb-2' >NFT owner address:{nft.owner} </div>
+                <div className='mb-2' >NFT seller address:{nft.seller} </div>
+                <div className='mb-2' >NFT price:{nft.price} </div>
                 <div className="p-4 bg-black">
                   <p className="text-2xl font-bold text-white">Price - {nft.price} Eth</p>
                 </div>

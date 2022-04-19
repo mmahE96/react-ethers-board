@@ -11,8 +11,9 @@ import NftHome from "./Pages/NftHome";
 import SellDigital from "./Pages/SellDigital";
 import MyAssets from "./Pages/MyAssets";
 import Dashboard from "./Pages/Dashboard";
+import React from "react";
 
-function App() {
+const App:React.FC<{}> = () => {
   //const provider = new ethers.providers.Web3Provider(window.ethereum)
   //const signer = provider.getSigner()
   //console.log(signer)
@@ -21,6 +22,7 @@ function App() {
   //secondary-color: #c5cae9
 
   return (
+
     <div className="App">
       <Routes>
         <Route path="/" element={<Home />} />
@@ -31,12 +33,12 @@ function App() {
         <Route path="/votingInfo" element={<VotingCotractInfo />} />
         <Route path="/nft" element={<Nft />} />
         <Route path="//nft/home" element={<NftHome />} />
-        <Route path="//nft/sellDigital" element={<SellDigital />} />
-        <Route path="//nft/myAssets" element={<MyAssets />} />
-        <Route path="//nft/dashboard" element={<Dashboard />} />
+        <Route path="/nft/sellDigital" element={<SellDigital />} />
+        <Route path="/nft/myAssets" element={<MyAssets />} />
+        <Route path="/nft/dashboard" element={<Dashboard />} />
       </Routes>
     </div>
-  );
-}
+    );
+};
 
 export default App;

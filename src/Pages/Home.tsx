@@ -3,7 +3,13 @@ import Header from "../components/Header";
 import { ethers } from "ethers";
 import { useState } from "react";
 
-export default function Home() {
+declare global {
+  interface Window {
+    ethereum: any;
+  }
+}
+
+export default function Home(): JSX.Element {
   const Metaprovider = new ethers.providers.Web3Provider(window.ethereum);
   const Rpcprovider = new ethers.providers.JsonRpcProvider(window.ethereum);
 

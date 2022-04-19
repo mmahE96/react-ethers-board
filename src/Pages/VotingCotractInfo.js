@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 export default function VotingCotractInfo() {
     const contractAddress  = "0xBd7B5a0f7D7A374A2F1a77D564aB76f37B013386"
     const provider = new ethers.providers.Web3Provider(window.ethereum)
-    const signer = provider.getSigner()
+    
    // const contract = await new ethers.Contract(contractAddress, Ballot.abi, provider) 
    // const contract = await new ethers.Contract(contractAddress, Ballot.abi, signer) 
     

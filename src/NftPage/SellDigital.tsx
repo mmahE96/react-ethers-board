@@ -13,7 +13,9 @@ import marketplace from "../artifacts/contracts/NFTMarketplace.sol/NFTMarket.jso
 const nftaddress = "0x607739B75eDfd19f6EB6cC488B085087A71E7bfc"
 const marketplaceAddress = "0xdb938dF8Dd242a73181a8788733ea291962919ED"
 
-const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
+const URL:any = 'https://ipfs.infura.io:5001/api/v0'
+
+const client = ipfsHttpClient(URL)
 
 export default function SellDigital() {
     const [fileUrl, setFileUrl] = useState(null)

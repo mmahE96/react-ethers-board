@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function Header():JSX.Element {
+const Header:React.FC = () => {
+  
   return (
     
     <div className="flex justify-around border p-6 bg-primary text-light font-extrabold text-2xl ">
@@ -21,3 +22,5 @@ export default function Header():JSX.Element {
     </div>
   );
 }
+
+export default Header;

@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function QueryBlock() {
+const QueryBlock: React.FC = () => {
   return (
     <div className="border">
       <h1>Querying the block</h1>
@@ -16,4 +16,6 @@ export default function QueryBlock() {
       </div>
     </div>
   );
-}
+};
+
+export default QueryBlock;

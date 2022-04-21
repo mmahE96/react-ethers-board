@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function WriteBlock() {
+const WriteBlock:React.FC = () => {
   return (
     <div>
       <h1>Writening on the block</h1>
@@ -25,3 +25,5 @@ export default function WriteBlock() {
     </div>
   );
 }
+
+export default WriteBlock;

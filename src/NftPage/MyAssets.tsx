@@ -6,6 +6,7 @@ import Header from '../components/Header'
 import SubHeader from '../components/SubHeader'
 
 
+
 import NFT from "../artifacts/contracts/NFT.sol/NFT.json"
 import marketplace from "../artifacts/contracts/NFTMarketplace.sol/NFTMarket.json"
 
@@ -63,7 +64,7 @@ export default function MyAssets() {
             nfts.map((nft, i) => (
               <div key={i} className="font-bold px-5 flex justify-center flex-col items-center border shadow rounded-xl overflow-hidden">
               <div>Nft ID:{nft.tokenId} </div>
-                <img className='mb-2' src={nft.image} style={{ height: '350px', width:"300px" }} className="rounded"/>
+                <img className='mb-2 rounded' src={nft.image} style={{ height: '350px', width:"300px" }} />
                 <div className='mb-2' >NFT owner address:{nft.owner} </div>
                 <div className='mb-2' >NFT seller address:{nft.seller} </div>
                 <div className='mb-2' >NFT price:{nft.price} </div>

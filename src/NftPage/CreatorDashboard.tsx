@@ -1,17 +1,17 @@
 import { ethers } from "ethers";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Web3Modal from "web3modal";
 import Header from "../components/Header";
 import SubHeader from "../components/SubHeader";
+
 
 import NFT from "../artifacts/contracts/NFT.sol/NFT.json";
 import marketplace from "../artifacts/contracts/NFTMarketplace.sol/NFTMarket.json";
 
 const nftaddress = "0x607739B75eDfd19f6EB6cC488B085087A71E7bfc";
 const marketplaceAddress = "0xdb938dF8Dd242a73181a8788733ea291962919ED";
-
-export default function CreatorDashboard() {
+const CreatorDashboard:React.FC = () => {
   const [nfts, setNfts] = useState([]);
   const [sold, setSold] = useState([]);
   const [loadingState, setLoadingState] = useState("not-loaded");
@@ -82,7 +82,6 @@ export default function CreatorDashboard() {
                 className="mb-2 rounded"
                 src={nft.image}
                 style={{ height: "350px", width: "300px" }}
-                
                 alt="No internet access"
               />
               <div className="mb-2">NFT owner address:{nft.owner} </div>
@@ -107,7 +106,6 @@ export default function CreatorDashboard() {
                     className="mb-2 rounded"
                     src={nft.image}
                     style={{ height: "350px", width: "300px" }}
-                   
                   />
                   <div className="mb-2">NFT owner address:{nft.owner} </div>
                   <div className="mb-2">NFT seller address:{nft.seller} </div>
@@ -121,3 +119,5 @@ export default function CreatorDashboard() {
     </div>
   );
 }
+
+export default CreatorDashboard;

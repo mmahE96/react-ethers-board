@@ -1,19 +1,20 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import Home from "./Pages/Home";
-import Block from "./Pages/Block";
-import Contract from "./Pages/Contract";
-import Transaction from "./Pages/Transaction";
-import Voting from "./Pages/Voting";
-import VotingCotractInfo from "./Pages/VotingCotractInfo";
-import Nft from "./Pages/Nft";
-import NftHome from "./Pages/NftHome";
-import SellDigital from "./Pages/SellDigital";
-import MyAssets from "./Pages/MyAssets";
-import Dashboard from "./Pages/Dashboard";
+import Home from "./ConnectPage/Home";
+import Block from "./BlockPage/Block";
+import Contract from "./ContractPage/Contract";
+import Transaction from "./ContractPage/Transaction";
+import Voting from "./ContractPage/Voting";
+import VotingCotractInfo from "./ContractPage/VotingCotractInfo";
+import Nft from "./NftPage/Nft";
+import NftHome from "./NftPage/NftHome";
+import SellDigital from "./NftPage/SellDigital";
+import MyAssets from "./NftPage/MyAssets";
+import Dashboard from "./NftPage/CreatorDashboard";
 import React from "react";
 
-const App:React.FC<{}> = () => {
+
+const App:React.FC = () => {
   //const provider = new ethers.providers.Web3Provider(window.ethereum)
   //const signer = provider.getSigner()
   //console.log(signer)
@@ -24,6 +25,7 @@ const App:React.FC<{}> = () => {
   return (
 
     <div className="App">
+      
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/block" element={<Block />} />

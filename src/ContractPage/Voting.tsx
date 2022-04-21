@@ -1,33 +1,34 @@
-import React from "react";
+import * as React from "react";
 import Header from "../components/Header";
 import Ballot from "../artifacts/contracts/Voting.sol/Ballot.json";
 import { ethers } from "ethers";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function Voting() {
+
+const Voting:React.FC = () => {
   const contractAddress = "0xBd7B5a0f7D7A374A2F1a77D564aB76f37B013386";
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
 
-  const [contract, setContract] = useState("");
-  const [cInterface, setInterface] = useState("");
+  const [contract, setContract] = useState<any>("");
+  const [cInterface, setInterface] = useState<any>("");
 
   const [winningProposal, setWproposal] = useState("No data");
-  const [userInfo, setUserInfo] = useState({
+  const [userInfo, setUserInfo] = useState<any>({
     vote: "No data",
     weight: "No data",
     delegate: "No data",
     voted: "No data",
   });
 
-  const [candidates, setCandidates] = useState("No candidates");
+  const [candidates, setCandidates] = useState<any>("No candidates");
   const [enableAddress, setEnableAddress] = useState("");
-  const [voteRError, setVoteRError] = useState("No problems");
+  const [voteRError, setVoteRError] = useState<any>("No problems");
   const [delegateAddress, setDelegateAddress] = useState("");
-  const [delError, setDelError] = useState("No problems");
+  const [delError, setDelError] = useState<any>("No problems");
   const [voteFor, setVoteFor] = useState("");
-  const [voteError, setVoteError] = useState("");
+  const [voteError, setVoteError] = useState<any>("");
   const [winner, setWinner] = useState("No winner at the moment");
 
   const [candidatePrice, setCandidatePrice] = useState("No data");
@@ -283,11 +284,11 @@ export default function Voting() {
           Estimated gas price: {rightPrice}
         </div>
         <div>
-          <labe>
+          <label>
             {" "}
             Enter address you want to give right to vote(if you are
             chairperson):
-          </labe>
+          </label>
           <br />
           <input
             className="border"
@@ -305,11 +306,12 @@ export default function Voting() {
       </div>
 
       <div className="flex flex-col bg-white font-mono mt-6">
+      Delegate Rights to: {delegateRights}
         <div>
-          Delegate Rights to: {delegateRights}
-          <br />
+         
+         
           Estimated gas price: {delegatePrice}
-          <br />
+         
         </div>
         <div>
           <input
@@ -367,3 +369,5 @@ export default function Voting() {
     </div>
   );
 }
+
+export default Voting;

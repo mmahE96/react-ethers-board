@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 import SubHeader from "../components/SubHeader";
 import React from "react";
 
-export default function Nft() {
+
+const Nft:React.FC = () => {
   return (
     <div>
       <Header />
@@ -14,3 +15,5 @@ export default function Nft() {
     </div>
   );
 }
+
+export default Nft;

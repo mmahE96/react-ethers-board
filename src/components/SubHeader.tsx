@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function SubHeader() {
+const SubHeader: React.FC = () => {
+  
   return (
+    
     <div className="flex justify-around border p-6 text-primary font-extrabold text-2xl mb-9">
       <Link className="hover:text-white hover:underline" to="/nft/home">
         NFT Home
@@ -18,4 +20,6 @@ export default function SubHeader() {
       </Link>
     </div>
   );
-}
+};
+
+export default SubHeader;

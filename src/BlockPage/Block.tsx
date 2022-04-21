@@ -3,24 +3,25 @@ import Header from "../components/Header";
 import Main from "../components/Main/Main";
 import { ethers } from "ethers";
 import { useState } from "react";
+import { Block as BlockT } from "../../node_modules/@ethersproject/abstract-provider/src.ts/index";
 
-export default function Block() {
+
+const Block: React.FC = () => {
   const provider = new ethers.providers.Web3Provider(window.ethereum);
-  console.log(provider.getBlockNumber());
 
-  const [blockNumber, setBlocknumber] = useState("No data");
-  const [balance, setBalance] = useState("No data");
-  const [block, setBlock] = useState("No data");
-  const [address, setAddress] = useState("");
-  const [count, setCount] = useState("");
+  const [blockNumber, setBlocknumber] = useState<number>();
+  const [balance, setBalance] = useState<string>();
+  const [block, setBlock] = useState<BlockT>();
+  const [address, setAddress] = useState<string>("");
+  const [count, setCount] = useState<number>();
 
   const getData = async () => {
     setBlocknumber(await provider.getBlockNumber());
     //setBalance(await provider.getBalance(address))
-    setBlock(await provider.getBlock());
+    setBlock(await provider.getBlock("last"));
   };
 
-  const submitAddress = (e) => {
+  const submitAddress = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Address submition successefull");
     console.log(address);
@@ -42,8 +43,6 @@ export default function Block() {
     setAddress(e.target.value);
   };
 
-  console.log(block);
-
   return (
     <div className="flex flex-col bg-white font-mono">
       <Header />
@@ -53,20 +52,15 @@ export default function Block() {
 
         <div className="flex justify-around flex-wrap gap-10 pt-9">
           <div className="bg-light rounded p-5 shadow-lg">
-          <div className="text-xl font-bold">
-
-            Current Block Number:
-            <br />
-            
-             {blockNumber}
-          </div>
+            <div className="text-xl font-bold">
+              Current Block Number:
+              <br />
+              {blockNumber}
+            </div>
           </div>
 
           <div className="bg-light rounded p-5 shadow-lg">
-          <div className="text-xl font-bold">
-            Block data:
-            </div>
-
+            <div className="text-xl font-bold">Block data:</div>
             <br />
             difficulty: {block.difficulty}
             <br />
@@ -91,10 +85,7 @@ export default function Block() {
           </div>
 
           <div className="bg-light rounded p-5 shadow-lg">
-          <div className="text-xl font-bold">
-
-            Balance:
-          </div>
+            <div className="text-xl font-bold">Balance:</div>
             <br />
             <form onSubmit={submitAddress}>
               <label>
@@ -120,10 +111,7 @@ export default function Block() {
           </div>
 
           <div className="bg-light rounded p-5 shadow-lg">
-          <div className="text-xl font-bold">
-
-            Transaction count:
-          </div>
+            <div className="text-xl font-bold">Transaction count:</div>
             <br />
             <form onSubmit={submitAddress}>
               <label>
@@ -149,31 +137,21 @@ export default function Block() {
           </div>
 
           <div className="bg-light rounded p-5 shadow-lg">
-          <div className="text-xl font-bold">
-
-            Current Block Number
-          </div>
+            <div className="text-xl font-bold">Current Block Number</div>
           </div>
 
           <div className="bg-light rounded p-5 shadow-lg">
-          <div className="text-xl font-bold">
-              
-            Balance of an account
-          </div>
+            <div className="text-xl font-bold">Balance of an account</div>
           </div>
 
           <div className="bg-light rounded p-5 shadow-lg">
-          <div className="text-xl font-bold">
-
-            Format in ethers(convert units)
-          </div>
+            <div className="text-xl font-bold">
+              Format in ethers(convert units)
+            </div>
           </div>
 
           <div className="bg-light rounded p-5 shadow-lg">
-          <div className="text-xl font-bold">
-
-            Convert string into the Wei
-          </div>
+            <div className="text-xl font-bold">Convert string into the Wei</div>
           </div>
         </div>
       </div>
@@ -181,4 +159,6 @@ export default function Block() {
       <div> WRITE TO THE BLOCKCHAIN</div>
     </div>
   );
-}
+};
+
+export default Block;

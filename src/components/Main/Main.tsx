@@ -3,7 +3,7 @@ import Connections from "./Connections";
 import QueryBlock from "./QueryBlock";
 import WriteBlock from "./WriteBlock";
 
-export default function Main() {
+const Main:React.FC = () => {
   return (
     <div className="flex flex-col gap-y-24">
       <Connections />
@@ -12,3 +12,5 @@ export default function Main() {
     </div>
   );
 }
+
+export default Main;

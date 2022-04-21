@@ -3,23 +3,17 @@ import Header from "../components/Header";
 import { ethers } from "ethers";
 import { useState } from "react";
 
+
 declare global {
   interface Window {
     ethereum: any;
+    ethers: any;
   }
 }
 
-export default function Home(): JSX.Element {
+const Home: React.FC = () => {
   const Metaprovider = new ethers.providers.Web3Provider(window.ethereum);
   const Rpcprovider = new ethers.providers.JsonRpcProvider(window.ethereum);
-
-  // The MetaMask plugin also allows signing transactions to
-  // send ether and pay to change state within the blockchain.
-  // For this, you need the account signer...
-  const signerOne = Metaprovider.getSigner();
-  const signerTwo = Rpcprovider.getSigner();
-  console.log("This is signer objec metaprovider:", signerOne);
-  console.log("This is signer objec rpcprovider:", signerTwo);
 
   const condition = Metaprovider.connection.url == "metamask";
 
@@ -27,7 +21,7 @@ export default function Home(): JSX.Element {
 
   const resObj = async () => {
     const netObj = await Metaprovider._networkPromise;
-    // console.log(netObj.name)
+
     setObj(netObj.name);
   };
 
@@ -64,4 +58,6 @@ export default function Home(): JSX.Element {
       </div>
     </div>
   );
-}
+};
+
+export default Home;

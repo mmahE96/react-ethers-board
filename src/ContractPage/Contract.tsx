@@ -3,8 +3,13 @@ import Header from '../components/Header'
 import {ethers} from "ethers"
 import Greeter from "../artifacts/contracts/Greeter.sol/Greeter.json"
 import { Link } from 'react-router-dom'
+import { BaseContract } from 'ethers'
+import { ContractInterface } from 'ethers'
 
-export default function Contract() {
+
+
+
+const Contract:React.FC = () => {
 
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     const signer = provider.getSigner()
@@ -17,22 +22,10 @@ export default function Contract() {
     const contractAddress = "0x5039a82817d481df8C4042089016fFb6F72b2F22"
     const [greeting, setGreetingValue] = useState("")
    
-    const [contract, setContract] = useState("")
+    const [contract, setContract] = useState<BaseContract>()
     const [fetchedAddress, setFetchedAddress] = useState("Fetch Greeting first")
     const [fetchedGreeting, setFetchedGreeting] = useState("Nothing fetched")
-    const [Ninterface, setInterface] = useState([
-      {
-        "name": "purple",
-        "type": "minivan",
-        "constant": "Unknown",
-        "payable": 7
-      },
-      {
-        "name": "red",
-        "type": "station wagon",
-        "constant": "Unknown",
-        "payable": 5
-      }])
+    const [Ninterface, setInterface] = useState<ContractInterface | any>()
       const [contractProvider, setContractProvider] = useState("Provider")
       const [contractSigner, setContractSigner] = useState("Signer")
 
@@ -135,7 +128,7 @@ export default function Contract() {
           Method name:{method.name == null ? "Null" : method.name}
           Method type: {method.type}
           Is it constant:{method.constat === true ? "true" : "false"}
-          Payable:{method.payable === true ? "true" : "false"}}
+          Payable:{method.payable === true ? "true" : "false"}
          </li>)}
         </ul>
       </div> 
@@ -150,6 +143,8 @@ export default function Contract() {
         </div>
     )
 }
+
+export default Contract;
 
 
 

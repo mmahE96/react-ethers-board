@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Connections() {
+const Connections = () => {
   return (
     <div className="border">
       <h1>Connections to the block</h1>
@@ -11,3 +11,5 @@ export default function Connections() {
     </div>
   );
 }
+
+export default Connections;

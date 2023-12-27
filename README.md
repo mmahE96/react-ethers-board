@@ -1,6 +1,38 @@
 # Getting Started with Create React App
 
+Built with React, this project efficiently handles smart contracts, voting processes, and NFT transactions. Embracing a modular structure, it facilitates uncomplicated development and seamless user navigation through its well-organized routing. Whether engaging with smart contracts or navigating the intricacies of voting and NFT transactions, this React project offers a developer-friendly environment and an intuitive user experience.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+##Screens:
+
+### CONNECT WALLET
+
+<img width="1438" alt="Screenshot 2022-12-06 at 11 22 24" src="https://github.com/mmahE96/react-ethers-board/assets/76560529/b887aa1e-1815-4b60-8576-7b5a03be04ad">
+
+### EXPLORE BLOCKS
+
+<img width="1439" alt="Screenshot 2022-12-06 at 11 23 19" src="https://github.com/mmahE96/react-ethers-board/assets/76560529/1cf87e70-d573-439a-b00a-87a5301bb9f8">
+
+### INTERACT WITH SMART CONTRACT
+
+<img width="1431" alt="Screenshot 2022-12-06 at 11 24 11" src="https://github.com/mmahE96/react-ethers-board/assets/76560529/ff874aff-dfc7-4268-8d18-c97152d8addb">
+
+### VOTING CONTRACT IMPLEMENTATION
+
+<img width="1434" alt="Screenshot 2022-12-06 at 11 24 58" src="https://github.com/mmahE96/react-ethers-board/assets/76560529/6738d506-6b39-401e-bd86-2500ed211cba">
+
+### DETAILED INTERACTION
+
+<img width="1430" alt="Screenshot 2022-12-06 at 11 25 31" src="https://github.com/mmahE96/react-ethers-board/assets/76560529/1ea33e07-c27b-4c99-9bb3-80e0a0a55d4b">
+
+
+
+
+
+
+
+
 
 ## Available Scripts
 
